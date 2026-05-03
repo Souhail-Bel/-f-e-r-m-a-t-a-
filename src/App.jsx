@@ -18,6 +18,17 @@ function App() {
             [ // : f e r m a t a]
           </button>
         </div>
+
+        <footer className="app-footer">
+          <p>
+            a prolongation at the discretion
+            <br />
+            of the performer of a musical note, chord,
+            <br />
+            or rest beyond its given time value
+          </p>
+          <p>&lt; merriam-webster &gt;</p>
+        </footer>
       </>
     );
   }

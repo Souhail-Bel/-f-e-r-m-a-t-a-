@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { quotesList } from "../data/quotes";
+import { useShuffledList } from "../hooks/useShuffledList";
 
 const Quotes = () => {
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
-  const fullQuote = quotesList[quoteIndex];
+  const { current, getNext } = useShuffledList(quotesList);
 
   useEffect(() => {
     let i = 0;
@@ -14,8 +15,8 @@ const Quotes = () => {
     setDisplayedText("");
 
     const typingInterval = setInterval(() => {
-      if (i < fullQuote.length) {
-        setDisplayedText((prev) => prev + fullQuote.charAt(i));
+      if (i < current.length) {
+        setDisplayedText((prev) => prev + current.charAt(i));
         i++;
       } else {
         clearInterval(typingInterval);
@@ -24,7 +25,7 @@ const Quotes = () => {
     }, 40);
 
     return () => clearInterval(typingInterval);
-  }, [quoteIndex, fullQuote]);
+  }, [quoteIndex, current]);
 
   const newQuote = () => {
     let random;
@@ -48,7 +49,7 @@ const Quotes = () => {
         <span className="blinking-cursor">_</span>
       </p>
 
-      <button className="next-btn" onClick={newQuote} disabled={isTyping}>
+      <button className="next-btn" onClick={getNext} disabled={isTyping}>
         {isTyping ? "Receiving..." : "New Quote"}
       </button>
     </div>

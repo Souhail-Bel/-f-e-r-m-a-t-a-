@@ -1,19 +1,15 @@
-import { useState } from "react";
 import { gifsList } from "../data/gifs";
+import { useShuffledList } from "../hooks/useShuffledList";
 
 const Gifs = () => {
-  const [gif, setGif] = useState(gifsList[0]);
-
-  const newGIF = () => {
-    setGif(gifsList[Math.floor(Math.random() * gifsList.length)]);
-  };
+  const { current, getNext } = useShuffledList(gifsList);
 
   return (
     <div className="sub-container">
       <h2>Cute Distractions</h2>
-      <img src={gif} alt="cute GIF goes here" className="cute-gif" />
+      <img src={current} alt="cute GIF goes here" className="cute-gif" />
       <br />
-      <button className="next-btn" onClick={newGIF}>
+      <button className="next-btn" onClick={getNext}>
         Next GIF
       </button>
     </div>
