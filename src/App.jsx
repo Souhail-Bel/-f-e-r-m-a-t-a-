@@ -3,6 +3,7 @@ import "./App.css";
 
 import Quotes from "./components/Quotes";
 import Gifs from "./components/Gifs";
+import Lyrics from "./components/Lyrics";
 import Sakura from "./components/Sakura";
 
 function App() {
@@ -53,10 +54,17 @@ function App() {
           >
             GIFs
           </button>
+          <button
+            className={activeTab === "lyrics" ? "active" : ""}
+            onClick={() => setActiveTab("lyrics")}
+          >
+            Lyrics
+          </button>
         </nav>
         <div className="main-area">
           {activeTab === "quotes" && <Quotes />}
           {activeTab === "gifs" && <Gifs />}
+          {activeTab === "lyrics" && <Lyrics />}
         </div>
         <footer className="app-footer">
           <p>made by a real human</p>

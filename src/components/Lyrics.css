@@ -1,0 +1,115 @@
+.lyrics-display {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tuner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #171514;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #000;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.signal-wave {
+  flex-grow: 1;
+  height: 40px;
+  margin-right: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.signal-wave svg {
+  width: 200%;
+  height: 100%;
+  stroke: #e4a173;
+  stroke-width: 2;
+  fill: none;
+  animation: wave-move 2s linear infinite;
+}
+
+@keyframes wave-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.knob-container {
+  text-align: center;
+  cursor: pointer;
+}
+
+.radio-knob {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #544f4a, #1a1817);
+  border: 2px solid #000;
+  position: relative;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.knob-indicator {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 10px;
+  background: #e4a173;
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(228, 161, 115, 0.5);
+}
+
+.knob-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  color: #7a736d;
+  margin-top: 5px;
+}
+
+.lyrics-lines {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #e8e0d5;
+  min-height: 120px;
+}
+
+.artist-info {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #3d3936;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.artist-name {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: #a3532c;
+}
+
+.source-link {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  color: #7a736d;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.source-link:hover {
+  color: #e4a173;
+}
