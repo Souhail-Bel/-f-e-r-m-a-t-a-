@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Sakura.css";
 
 const Sakura = () => {
   const [leaves, setLeaves] = useState([]);
