@@ -1,19 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 import Quotes from "./components/Quotes";
 import Gifs from "./components/Gifs";
 import Lyrics from "./components/Lyrics";
 import Sakura from "./components/Sakura";
+import Sky from "./components/Sky";
 
 function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [activeTab, setActiveTab] = useState("quotes");
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const hour = time.getHours();
+  // night sunrise sunset daytime
+  let theme = "night";
+  let status = "NIGHT";
+
+  if (hour >= 5 && hour < 9) {
+    theme = "sunrise";
+    status = "SUNRISE";
+  } else if (hour >= 9 && hour < 16) {
+    theme = "daytime";
+    status = "DAYLIGHT";
+  } else if (hour >= 16 && hour < 19) {
+    theme = "sunset";
+    status = "SUNSET";
+  }
+
+  const timeString = time.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+
+  const renderDeco = () => (
+    <>
+      <Sky theme={theme} />
+      <Sakura />
+
+      <div className={`time-corner ${theme}`}>
+        <div className="time-value">{timeString}</div>
+        <div className="time-status">{status} // PHASE</div>
+      </div>
+    </>
+  );
 
   if (!isUnlocked) {
     return (
-      <>
-        <Sakura />
+      <div className={`theme-wrapper ${theme}`}>
+        {renderDeco()}
         <div className="app-container locked-screen">
           <button className="unlock-btn" onClick={() => setIsUnlocked(true)}>
             [ // : f e r m a t a]
@@ -30,13 +72,13 @@ function App() {
           </p>
           <p>&lt; merriam-webster &gt;</p>
         </footer>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <Sakura />
+    <div className={`theme-wrapper ${theme}`}>
+      {renderDeco()}
       <div
         className="app-container main-screen switch-animation"
         key={activeTab}
@@ -72,7 +114,7 @@ function App() {
           <p>[ // : f e r m a t a ] - Eien Star</p>
         </footer>
       </div>
-    </>
+    </div>
   );
 }
 

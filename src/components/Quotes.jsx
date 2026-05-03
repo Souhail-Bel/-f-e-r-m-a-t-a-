@@ -15,25 +15,23 @@ const Quotes = () => {
     setDisplayedText("");
 
     const typingInterval = setInterval(() => {
-      if (i < current.length) {
-        setDisplayedText((prev) => prev + current.charAt(i));
-        i++;
-      } else {
+      setDisplayedText((prev) => {
+        if (i < current.length) {
+          return current.substring(0, i + 1);
+        }
+        return prev;
+      });
+
+      i++;
+
+      if (i >= current.length) {
         clearInterval(typingInterval);
         setIsTyping(false);
       }
     }, 40);
 
     return () => clearInterval(typingInterval);
-  }, [quoteIndex, current]);
-
-  const newQuote = () => {
-    let random;
-    do {
-      random = Math.floor(Math.random() * quotesList.length);
-    } while (random === quoteIndex && quotesList.length > 1);
-    setQuoteIndex(random);
-  };
+  }, [current]);
 
   return (
     <div className="sub-container">
