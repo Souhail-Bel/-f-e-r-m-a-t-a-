@@ -22,7 +22,7 @@
 }
 
 .night .star-field {
-  opacity: 0.3;
+  opacity: 1;
 }
 
 .celestial-body {
@@ -48,7 +48,7 @@
 }
 
 .daytime .sun {
-  opacity: 0.3;
+  opacity: 0.6;
   left: 50%;
   top: 15%;
   transform: translateX(-50%);
